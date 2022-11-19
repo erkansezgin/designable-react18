@@ -19,9 +19,9 @@ export const useValidNodeOffsetRect = (node: TreeNode) => {
   const viewport = useViewport()
   const [, forceUpdate] = useState(null)
   const rectRef = useRef<DOMRect>(viewport.getValidNodeOffsetRect(node))
-  const idleTaskRef = useRef(null)
+  const idleTaskRef = useRef<any>(null)
   const unmountRef = useRef(false)
-  const observerRef = useRef(null)
+  const observerRef = useRef<any>(null)
   const element = viewport.findElementById(node?.id)
 
   const compute = useCallback(() => {
@@ -34,7 +34,7 @@ export const useValidNodeOffsetRect = (node: TreeNode) => {
     const nextRect = viewport.getValidNodeOffsetRect(node)
     if (!isEqualRect(rectRef.current, nextRect) && nextRect) {
       rectRef.current = nextRect
-      forceUpdate(nextRect)
+      forceUpdate(nextRect as any)
     }
   }, [viewport, node])
 
