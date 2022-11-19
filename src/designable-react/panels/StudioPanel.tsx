@@ -9,7 +9,8 @@ export interface IStudioPanelProps {
   actions?: React.ReactNode
   prefixCls?: string
   theme?: string
-  position?: React.ComponentProps<typeof Layout>['position']
+  position?: React.ComponentProps<typeof Layout>['position'],
+  children?: React.ReactNode
 }
 
 const StudioPanelInternal: React.FC<IStudioPanelProps> = ({

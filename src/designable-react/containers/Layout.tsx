@@ -4,14 +4,14 @@ import { DesignerLayoutContext } from '../context'
 import { IDesignerLayoutProps } from '../types'
 import cls from 'classnames'
 
-export const Layout: React.FC<IDesignerLayoutProps> = (props) => {
+export const Layout: React.FC<IDesignerLayoutProps> = (props: any) => {
   const layout = useContext(DesignerLayoutContext)
   const ref = useRef<HTMLDivElement>()
 
   useLayoutEffect(() => {
     if (ref.current) {
       each(props.variables, (value, key) => {
-        ref.current.style.setProperty(`--${key}`, value)
+        ref.current?.style.setProperty(`--${key}`, value)
       })
     }
   }, [])
@@ -21,7 +21,7 @@ export const Layout: React.FC<IDesignerLayoutProps> = (props) => {
   }
   return (
     <div
-      ref={ref}
+      ref={ref as any}
       className={cls({
         [`${props.prefixCls}app`]: true,
         [`${props.prefixCls}${props.theme}`]: props.theme,

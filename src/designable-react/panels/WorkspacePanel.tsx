@@ -3,12 +3,13 @@ import { usePrefix } from '../hooks'
 
 export interface IWorkspaceItemProps {
   style?: React.CSSProperties
-  flexable?: boolean
+  flexable?: boolean,
+  children?: React.ReactNode,
 }
 
 export const WorkspacePanel: React.FC & {
   Item?: React.FC<IWorkspaceItemProps>
-} = (props) => {
+} = (props: any) => {
   const prefix = usePrefix('workspace-panel')
   return <div className={prefix}>{props.children}</div>
 }
