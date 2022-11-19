@@ -5,12 +5,12 @@ import { ArrayItems, Form, Input, FormItem } from '@formily/antd'
 import { createForm, Form as FormCore } from '@formily/core'
 import { observer } from '@formily/reactive-react'
 import { createSchemaField } from '@formily/react'
-import { ValueInput } from '@designable/react-settings-form'
-import { usePrefix, TextWidget } from '@designable/react'
 import { Header } from './Header'
 import { traverseTree } from './shared'
 import { ITreeDataSource } from './types'
 import './styles.less'
+import { usePrefix, TextWidget } from '../../../../react'
+import { ValueInput } from '../../../../react-settings-form'
 
 const SchemaField = createSchemaField({
   components: {
