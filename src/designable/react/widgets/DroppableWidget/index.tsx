@@ -16,7 +16,8 @@ export interface IDroppableWidgetProps {
   height?: number
   style?: React.CSSProperties
   className?: string
-  hasChildren?: boolean
+  hasChildren?: boolean,
+  children?: React.ReactNode,
 }
 
 export const DroppableWidget: React.FC<IDroppableWidgetProps> = observer(
