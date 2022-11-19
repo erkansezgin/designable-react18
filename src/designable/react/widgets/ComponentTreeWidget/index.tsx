@@ -1,4 +1,4 @@
-import React, { Fragment, useCallback, useEffect } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import { useTree, usePrefix, useDesigner, useComponents } from '../../hooks'
 import { TreeNodeContext, DesignerComponentsContext } from '../../context'
 import { IDesignerComponents } from '../../types'
@@ -18,35 +18,6 @@ export interface ITreeNodeWidgetProps {
   //children?: React.ReactNode
 }
 
-export const TreeNodeView = (props: {
-  dataId: any,
-  node: TreeNode
-  children?: React.ReactNode,
-}) => {
-  const { dataId, node, children } = props;
-  const components = useComponents()
-  const componentName = node.componentName
-  const Component = components[componentName]
-  const renderProps = useCallback((extendsProps: any = {}) => {
-    const props = {
-      ...node.designerProps?.defaultProps,
-      ...extendsProps,
-      ...node.props,
-      ...node.designerProps?.getComponentProps?.(node),
-    }
-    if (node.depth === 0) {
-      delete props.style
-    }
-    return props
-  }, [node])
-
-  return (
-    <Component {...renderProps(dataId)}>
-      {children}
-    </Component>
-  )
-}
-
 export const TreeNodeWidget: React.FC<ITreeNodeWidgetProps> = observer(
   (props: ITreeNodeWidgetProps) => {
     const designer = useDesigner(props.node?.designerProps?.effects)
@@ -58,7 +29,19 @@ export const TreeNodeWidget: React.FC<ITreeNodeWidgetProps> = observer(
         return <TreeNodeWidget key={child.id} node={child} />
       })
     }
-
+    const renderProps = (extendsProps: any = {}) => {
+      const props = {
+        ...node.designerProps?.defaultProps,
+        ...extendsProps,
+        ...node.props,
+        ...node.designerProps?.getComponentProps?.(node),
+      }
+      if (node.depth === 0) {
+        delete props.style
+      }
+      return props
+    }
+    
     const renderComponent = () => {
       const componentName = node.componentName
       const Component = components[componentName]
@@ -67,9 +50,11 @@ export const TreeNodeWidget: React.FC<ITreeNodeWidgetProps> = observer(
         if (designer) {
           dataId[designer?.props?.nodeIdAttrName as any] = node.id
         }
-        return <TreeNodeView node={node} dataId={dataId}>
-          {renderChildren()}
-        </TreeNodeView>
+        return React.createElement(
+          Component,
+          renderProps(dataId),
+          ...renderChildren()
+        )
       } else {
         if (node?.children?.length) {
           return <Fragment>{renderChildren()}</Fragment>
