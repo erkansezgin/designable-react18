@@ -1,10 +1,10 @@
 import React, { createContext, useContext, useEffect, useRef } from 'react'
-import { isStr, isFn, isObj, isPlainObj } from '../../../shared'
 import { observer } from '@formily/reactive-react'
 import { Tooltip, TooltipProps } from 'antd'
 import { usePrefix, useRegistry, useTheme } from '../../hooks'
 import cls from 'classnames'
 import './styles.less'
+import { isFn, isObj, isPlainObj, isStr } from '@designable/shared'
 
 const IconContext = createContext<IconProviderProps | null>(null)
 
