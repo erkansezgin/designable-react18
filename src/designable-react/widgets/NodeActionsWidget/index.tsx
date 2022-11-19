@@ -11,6 +11,7 @@ export interface INodeActionsWidgetProps {
   className?: string
   style?: React.CSSProperties
   activeShown?: boolean
+  children?: React.ReactNode
 }
 
 export interface INodeActionsWidgetActionProps
@@ -20,9 +21,10 @@ export interface INodeActionsWidgetActionProps
   style?: React.CSSProperties
   title: React.ReactNode
   icon?: React.ReactNode
+  children?: React.ReactNode
 }
 
-export const NodeActionsWidget: React.FC<INodeActionsWidgetProps> & {
+const NodeActionsWidgetInner: React.FC<INodeActionsWidgetProps> & {
   Action?: React.FC<INodeActionsWidgetActionProps>
 } = observer((props) => {
   const node = useTreeNode()
@@ -38,7 +40,7 @@ export const NodeActionsWidget: React.FC<INodeActionsWidgetProps> & {
   )
 })
 
-NodeActionsWidget.Action = ({ icon, title, ...props }) => {
+NodeActionsWidgetInner.Action = ({ icon, title, ...props }) => {
   const prefix = usePrefix('node-actions-item')
   return (
     <Typography.Link
@@ -53,3 +55,7 @@ NodeActionsWidget.Action = ({ icon, title, ...props }) => {
     </Typography.Link>
   )
 }
+
+export const NodeActionsWidget = NodeActionsWidgetInner as React.FC<INodeActionsWidgetProps> & {
+  Action: React.FC<INodeActionsWidgetActionProps>
+} 
