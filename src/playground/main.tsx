@@ -79,7 +79,7 @@ GlobalRegistry.registerDesignerLocales({
   },
 })
 
-const App = () => {
+export const App = () => {
   const engine = useMemo(
     () =>
       createDesigner({
@@ -214,4 +214,3 @@ const App = () => {
   )
 }
 
-ReactDOM.render(<App />, document.getElementById('root'))
