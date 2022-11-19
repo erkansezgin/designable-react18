@@ -1,5 +1,4 @@
 import React from 'react'
-import { usePrefix, IconWidget } from '@designable/react'
 import { useField, Field, observer } from '@formily/react'
 import { Select, Radio, NumberPicker } from '@formily/antd'
 import { FoldItem } from '../FoldItem'
@@ -7,6 +6,7 @@ import { InputItems } from '../InputItems'
 import { SizeInput } from '../SizeInput'
 import { ColorInput } from '../ColorInput'
 import cls from 'classnames'
+import { IconWidget, usePrefix } from '../../../designable-react'
 export interface IFontStyleSetterProps {
   className?: string
   style?: React.CSSProperties

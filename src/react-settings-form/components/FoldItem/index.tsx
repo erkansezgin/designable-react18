@@ -8,10 +8,14 @@ import { usePrefix, IconWidget } from '../../../designable-react'
 
 const ExpandedMap = new Map<string, boolean>()
 
-export const FoldItem: React.FC<IFormItemProps> & {
-  Base?: React.FC
-  Extra?: React.FC
-} = observer(({ className, style, children, ...props }) => {
+const FoldItemInner: React.FC<IFormItemProps &
+{
+  children?: React.ReactNode,
+  className?: string,
+}> & {
+  Base?: React.FC<any>
+  Extra?: React.FC,
+} = observer(({ className, style, children, ...other }) => {
   const prefix = usePrefix('fold-item')
   const field = useField()
   const expand = useMemo(
@@ -41,7 +45,7 @@ export const FoldItem: React.FC<IFormItemProps> & {
         }}
       >
         <FormItemBaseItem
-          {...props}
+          {...other}
           label={
             <span
               className={cls(prefix + '-title', {
@@ -49,7 +53,7 @@ export const FoldItem: React.FC<IFormItemProps> & {
               })}
             >
               {slots.current.extra && <IconWidget infer="Expand" size={10} />}
-              {props.label}
+              {(other as any).label}
             </span>
           }
         >
@@ -82,5 +86,14 @@ const Extra: React.FC = () => {
 
 Extra.displayName = 'FoldItem.Extra'
 
-FoldItem.Base = Base
-FoldItem.Extra = Extra
+FoldItemInner.Base = Base
+FoldItemInner.Extra = Extra
+
+export const FoldItem = FoldItemInner as React.FC<IFormItemProps &
+{
+  children?: React.ReactNode,
+  className?: string,
+}> & {
+  Base: React.FC<any>
+  Extra: React.FC<any>,
+}

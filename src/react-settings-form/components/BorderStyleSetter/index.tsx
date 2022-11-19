@@ -5,7 +5,7 @@ import { Select } from '@formily/antd'
 import { observable } from '@formily/reactive'
 import { Field as FieldType } from '@formily/core'
 import { useField, Field, observer } from '@formily/react'
-import { FoldItem } from '../FoldItem'
+import { FoldItemInner } from '../FoldItem'
 import { ColorInput } from '../ColorInput'
 import { SizeInput } from '../SizeInput'
 import { PositionInput } from '../PositionInput'
@@ -84,8 +84,8 @@ export const BorderStyleSetter: React.FC<IBorderStyleSetterProps> = observer(
     }
 
     return (
-      <FoldItem label={field.title}>
-        <FoldItem.Extra>
+      <FoldItemInner label={field.title}>
+        <FoldItemInner.Extra>
           <div className={cls(prefix, className)} style={style}>
             <div className={prefix + '-position'}>
               <PositionInput
@@ -123,8 +123,8 @@ export const BorderStyleSetter: React.FC<IBorderStyleSetterProps> = observer(
               })}
             </div>
           </div>
-        </FoldItem.Extra>
-      </FoldItem>
+        </FoldItemInner.Extra>
+      </FoldItemInner>
     )
   }
 )

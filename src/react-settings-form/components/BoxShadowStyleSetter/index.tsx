@@ -1,7 +1,7 @@
 import React from 'react'
 import { usePrefix } from '@designable/react'
 import { useField, observer } from '@formily/react'
-import { FoldItem } from '../FoldItem'
+import { FoldItemInner } from '../FoldItem'
 import { ColorInput } from '../ColorInput'
 import { SizeInput } from '../SizeInput'
 import { InputItems } from '../InputItems'
@@ -35,15 +35,15 @@ export const BoxShadowStyleSetter: React.FC<IBoxShadowStyleSetterProps> =
       }
     }
     return (
-      <FoldItem
+      <FoldItemInner
         className={cls(prefix, props.className)}
         style={props.style}
         label={field.title}
       >
-        <FoldItem.Base>
+        <FoldItemInner.Base>
           <ColorInput {...createBoxShadowConnector(4)} />
-        </FoldItem.Base>
-        <FoldItem.Extra>
+        </FoldItemInner.Base>
+        <FoldItemInner.Extra>
           <InputItems width="50%">
             <InputItems.Item icon="AxisX">
               <SizeInput
@@ -70,7 +70,7 @@ export const BoxShadowStyleSetter: React.FC<IBoxShadowStyleSetterProps> =
               />
             </InputItems.Item>
           </InputItems>
-        </FoldItem.Extra>
-      </FoldItem>
+        </FoldItemInner.Extra>
+      </FoldItemInner>
     )
   })

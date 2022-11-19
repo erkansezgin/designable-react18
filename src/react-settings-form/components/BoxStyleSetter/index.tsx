@@ -1,6 +1,6 @@
 import React from 'react'
 import { useField, observer } from '@formily/react'
-import { FoldItem } from '../FoldItem'
+import { FoldItemInner } from '../FoldItem'
 import { SizeInput } from '../SizeInput'
 import { InputItems } from '../InputItems'
 import cls from 'classnames'
@@ -63,7 +63,7 @@ export const BoxStyleSetter: React.FC<IMarginStyleSetterProps> = observer(
       }
     }
 
-    const FoldItemAny = FoldItem as any
+    const FoldItemAny = FoldItemInner as any
     return (
       <FoldItemAny className={cls(prefix, props.className)} label={field.title}>
         <FoldItemAny.Base>

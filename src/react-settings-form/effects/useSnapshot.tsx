@@ -1,7 +1,7 @@
 import { Operation } from '@designable/core'
 import { onFieldInputValueChange } from '@formily/core'
 
-let timeRequest = null
+let timeRequest:any = null
 
 export const useSnapshot = (operation: Operation) => {
   onFieldInputValueChange('*', () => {
