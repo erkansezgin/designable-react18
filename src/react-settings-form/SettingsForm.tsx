@@ -2,7 +2,6 @@ import React, { useMemo } from 'react'
 import { createForm } from '@formily/core'
 import { Form } from '@formily/antd'
 import { observer } from '@formily/react'
-import { requestIdle, cancelIdle } from '../shared'
 import { SchemaField } from './SchemaField'
 import { ISettingFormProps } from './types'
 import { SettingsFormContext } from './shared/context'
@@ -11,6 +10,7 @@ import { Empty } from 'antd'
 import cls from 'classnames'
 import './styles.less'
 import { useWorkbench, useOperation, useCurrentNode, useSelected, usePrefix, IconWidget, NodePathWidget } from '../designable-react'
+import { cancelIdle, requestIdle } from '@designable/shared'
 
 const GlobalState = {
   idleRequest: null,

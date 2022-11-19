@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@designable/core": "^1.0.0-beta.45",
+    "@designable/shared": "^1.0.0-beta.45",
     "@formily/antd": "^2.2.12",
     "@formily/core": "^2.2.12",
     "@formily/react": "^2.2.12",
