@@ -48,7 +48,7 @@ export const Input: ISchema & { TextArea?: ISchema } = {
     },
     size: {
       type: 'string',
-      enum: ['large', 'small', 'middle', null] as any,
+      enum: ['large', 'small', 'middle', ""],
       'x-decorator': 'FormItem',
       'x-component': 'Select',
       'x-component-props': {
