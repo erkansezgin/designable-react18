@@ -4,8 +4,6 @@ import { createForm, isVoidField } from '@formily/core'
 import { createSchemaField } from '@formily/react'
 import { GlobalRegistry } from '@designable/core'
 import { requestIdle } from '@designable/shared'
-import { usePrefix, TextWidget } from '@designable/react'
-import { MonacoInput } from '@designable/react-settings-form'
 import {
   Form,
   ArrayTable,
@@ -21,13 +19,15 @@ import { FulfillRunHelper } from './helpers'
 import { IReaction } from './types'
 import './declarations'
 import './styles.less'
+import { MonacoInput } from '../../../../react-settings-form'
+import { TextWidget, usePrefix } from '../../../../react'
 
 export interface IReactionsSetterProps {
   value?: IReaction
   onChange?: (value: IReaction) => void
 }
 
-const TypeView = ({ value }) => {
+const TypeView = ({ value }: any) => {
   const text = String(value)
   if (text.length <= 26) return <Tag>{text}</Tag>
   return (
@@ -146,7 +146,7 @@ export const ReactionsSetter: React.FC<IReactionsSetterProps> = (props) => {
     })
   }, [modalVisible, props.value])
   const formCollapse = useMemo(
-    () => FormCollapse.createFormCollapse(['deps', 'state']),
+    () => FormCollapse.createFormCollapse && FormCollapse.createFormCollapse(['deps', 'state']),
     [modalVisible]
   )
   const openModal = () => setModalVisible(true)
@@ -319,7 +319,7 @@ export const ReactionsSetter: React.FC<IReactionsSetterProps> = (props) => {
                               if (isVoidField(field)) return
                               const property = field
                                 .query('.property')
-                                .get('inputValues')
+                                .get('inputValues') as any
                               property[0] = property[0] || 'value'
                               field.query('.source').take((source) => {
                                 if (isVoidField(source)) return
@@ -336,7 +336,7 @@ export const ReactionsSetter: React.FC<IReactionsSetterProps> = (props) => {
                                     field.value = `any[]`
                                   } else if (property[0]) {
                                     field.value =
-                                      FieldStateValueTypes[property[0]]
+                                      (FieldStateValueTypes as any)[property[0]]
                                   } else {
                                     field.value = 'any'
                                   }
@@ -416,9 +416,9 @@ export const ReactionsSetter: React.FC<IReactionsSetterProps> = (props) => {
                           field.componentProps.extraLib = `
                           declare var $deps : {
                             ${deps.map(({ name, type }) => {
-                              if (!name) return ''
-                              return `${name}?:${type || 'any'},`
-                            })}
+                            if (!name) return ''
+                            return `${name}?:${type || 'any'},`
+                          })}
                           }
                           `
                         }
