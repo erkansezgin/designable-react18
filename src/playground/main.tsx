@@ -1,12 +1,10 @@
 import 'antd/dist/antd.less'
-import React, { useMemo } from 'react'
-import ReactDOM from 'react-dom'
+import { useMemo } from 'react'
 import {
   createDesigner,
   GlobalRegistry,
   Shortcut,
   KeyCode,
-  Workspace as WorkspaceCore,
 } from '@designable/core'
 import {
   LogoWidget,
@@ -45,11 +43,15 @@ import {
   FormLayout,
   FormGrid,
 } from '../designable/formily-antd'
-import { Designer, StudioPanel, CompositePanel as CompositePanel2, ResourceWidget, OutlineTreeWidget, HistoryWidget, WorkspacePanel, ToolbarPanel, DesignerToolsWidget, ViewToolsWidget, ViewportPanel, ViewPanel, ComponentTreeWidget, SettingsPanel } from '../designable/react'
+import {
+  Designer, StudioPanel, CompositePanel as CompositePanel2, ResourceWidget, OutlineTreeWidget, HistoryWidget,
+  WorkspacePanel, ToolbarPanel, DesignerToolsWidget, ViewToolsWidget, ViewportPanel, ViewPanel, ComponentTreeWidget, SettingsPanel,
+  Workspace as WorkspaceReact,
+} from '../designable/react'
 import { setNpmCDNRegistry, SettingsForm } from '../designable/react-settings-form'
 
 const CompositePanel = CompositePanel2 as any;
-const Workspace = WorkspaceCore as any;
+const Workspace = WorkspaceReact as any;
 setNpmCDNRegistry('//unpkg.com')
 
 GlobalRegistry.registerDesignerLocales({
