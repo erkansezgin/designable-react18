@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+import './app.less';
 import { App } from './playground/main';
 import reportWebVitals from './reportWebVitals';
 
