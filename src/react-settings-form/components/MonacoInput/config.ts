@@ -27,7 +27,7 @@ export const initMonaco = () => {
       noSyntaxValidation: true,
     })
     monaco.languages.registerDocumentFormattingEditProvider('typescript', {
-      async provideDocumentFormattingEdits(model) {
+      async provideDocumentFormattingEdits(model:any) {
         return [
           {
             text: await format(
@@ -38,7 +38,7 @@ export const initMonaco = () => {
           },
         ]
       },
-    })
+    } as any)
     initialized = true
   })
 }
