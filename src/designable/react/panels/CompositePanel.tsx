@@ -5,7 +5,7 @@ import { IconWidget, TextWidget } from '../widgets'
 import { usePrefix } from '../hooks'
 
 export interface ICompositePanelProps {
-  children(children: any): string | number | (() => string | number)
+  children(children: any): string | number | (() => string | number) 
   direction?: 'left' | 'right'
   showNavTitle?: boolean
   defaultOpen?: boolean
