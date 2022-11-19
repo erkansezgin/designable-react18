@@ -1,10 +1,10 @@
 import React from 'react'
 import { useField, observer } from '@formily/react'
-import { usePrefix, IconWidget } from '@designable/react'
 import { FoldItem } from '../FoldItem'
 import { SizeInput } from '../SizeInput'
 import { InputItems } from '../InputItems'
 import cls from 'classnames'
+import { usePrefix } from '../../../designable-react'
 
 type Position = 'top' | 'right' | 'left' | 'bottom' | 'all'
 export interface IMarginStyleSetterProps {
@@ -63,15 +63,16 @@ export const BoxStyleSetter: React.FC<IMarginStyleSetterProps> = observer(
       }
     }
 
+    const FoldItemAny = FoldItem as any
     return (
-      <FoldItem className={cls(prefix, props.className)} label={field.title}>
-        <FoldItem.Base>
+      <FoldItemAny className={cls(prefix, props.className)} label={field.title}>
+        <FoldItemAny.Base>
           <SizeInput
             {...createPositionHandler('all', props)}
             exclude={['inherit', 'auto']}
           />
-        </FoldItem.Base>
-        <FoldItem.Extra>
+        </FoldItemAny.Base>
+        <FoldItemAny.Extra>
           <InputItems width="50%">
             <InputItems.Item icon={props.labels[0]}>
               <SizeInput
@@ -98,8 +99,8 @@ export const BoxStyleSetter: React.FC<IMarginStyleSetterProps> = observer(
               />
             </InputItems.Item>
           </InputItems>
-        </FoldItem.Extra>
-      </FoldItem>
+        </FoldItemAny.Extra>
+      </FoldItemAny>
     )
   }
 )

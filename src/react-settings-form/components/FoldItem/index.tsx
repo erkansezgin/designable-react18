@@ -2,9 +2,9 @@ import React, { Fragment, useRef, useMemo } from 'react'
 import { FormItem, IFormItemProps } from '@formily/antd'
 import { useField, observer } from '@formily/react'
 import { observable } from '@formily/reactive'
-import { IconWidget, usePrefix } from '@designable/react'
 import cls from 'classnames'
 import './styles.less'
+import { usePrefix, IconWidget } from '../../../designable-react'
 
 const ExpandedMap = new Map<string, boolean>()
 
@@ -21,14 +21,16 @@ export const FoldItem: React.FC<IFormItemProps> & {
   const slots = useRef({ base: null, extra: null })
   React.Children.forEach(children, (node) => {
     if (React.isValidElement(node)) {
-      if (node?.['type']?.['displayName'] === 'FoldItem.Base') {
+      if ((node as any)?.['type']?.['displayName'] === 'FoldItem.Base') {
         slots.current.base = node['props'].children
       }
-      if (node?.['type']?.['displayName'] === 'FoldItem.Extra') {
+      if ((node as any)?.['type']?.['displayName'] === 'FoldItem.Extra') {
         slots.current.extra = node['props'].children
       }
     }
   })
+
+  const FormItemBaseItem = FormItem.BaseItem as any
   return (
     <div className={cls(prefix, className)}>
       <div
@@ -38,7 +40,7 @@ export const FoldItem: React.FC<IFormItemProps> & {
           ExpandedMap.set(field.address.toString(), expand.value)
         }}
       >
-        <FormItem.BaseItem
+        <FormItemBaseItem
           {...props}
           label={
             <span
@@ -59,7 +61,7 @@ export const FoldItem: React.FC<IFormItemProps> & {
           >
             {slots.current.base}
           </div>
-        </FormItem.BaseItem>
+        </FormItemBaseItem>
       </div>
       {expand.value && slots.current.extra && (
         <div className={prefix + '-extra'}>{slots.current.extra}</div>
