@@ -48,7 +48,7 @@ export const OutlineTreeWidget: React.FC<IOutlineTreeWidgetProps> = observer(
           className={cls(prefix + '-container', className)}
           style={style}
         >
-          <div className={prefix + '-content'} ref={ref}>
+          <div className={prefix + '-content'} ref={ref as any}>
             <OutlineTreeNode node={tree} workspaceId={workspaceId} />
             <div
               className={prefix + '-aux'}

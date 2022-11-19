@@ -11,18 +11,18 @@ export const FreeSelection = observer(() => {
   const prefix = usePrefix('aux-free-selection')
   const createSelectionStyle = () => {
     const startDragPoint = viewport.getOffsetPoint({
-      x: cursor.dragStartPosition.topClientX,
-      y: cursor.dragStartPosition.topClientY,
+      x: cursor.dragStartPosition.topClientX || 0,
+      y: cursor.dragStartPosition.topClientY || 0,
     })
     const currentPoint = viewport.getOffsetPoint({
-      x: cursor.position.topClientX,
-      y: cursor.position.topClientY,
+      x: cursor.position.topClientX || 0,
+      y: cursor.position.topClientY || 0,
     })
     const rect = calcRectByStartEndPoint(
       startDragPoint,
       currentPoint,
-      viewport.scrollX - cursor.dragStartScrollOffset.scrollX,
-      viewport.scrollY - cursor.dragStartScrollOffset.scrollY
+      viewport.scrollX - (cursor.dragStartScrollOffset.scrollX || 0),
+      viewport.scrollY - (cursor.dragStartScrollOffset.scrollY || 0)
     )
     const baseStyle: React.CSSProperties = {
       position: 'absolute',

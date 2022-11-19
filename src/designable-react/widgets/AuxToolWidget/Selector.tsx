@@ -12,7 +12,7 @@ const useMouseHover = <T extends { current: HTMLElement }>(
   leave?: () => void
 ) => {
   useEffect(() => {
-    let timer = null
+    let timer: any = null
     let unmounted = false
     const onMouseOver = (e: MouseEvent) => {
       const target: HTMLElement = e.target as any
@@ -94,7 +94,7 @@ export const Selector: React.FC<ISelectorProps> = observer(({ node }) => {
   }
 
   useMouseHover(
-    ref,
+    ref as any,
     () => {
       setExpand(true)
     },
