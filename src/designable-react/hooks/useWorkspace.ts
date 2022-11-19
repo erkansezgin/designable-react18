@@ -10,7 +10,7 @@ export const useWorkspace = (id?: string): Workspace => {
   if (workspaceId) {
     return designer.workbench.findWorkspaceById(workspaceId)
   }
-  if (globalThisPolyfill['__DESIGNABLE_WORKSPACE__'])
-    return globalThisPolyfill['__DESIGNABLE_WORKSPACE__']
+  if ((globalThisPolyfill as any)['__DESIGNABLE_WORKSPACE__'])
+    return (globalThisPolyfill as any)['__DESIGNABLE_WORKSPACE__']
   return designer.workbench.currentWorkspace
 }

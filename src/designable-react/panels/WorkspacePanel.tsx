@@ -7,14 +7,14 @@ export interface IWorkspaceItemProps {
   children?: React.ReactNode,
 }
 
-export const WorkspacePanel: React.FC & {
+const WorkspacePanelInner: React.FC & {
   Item?: React.FC<IWorkspaceItemProps>
 } = (props: any) => {
   const prefix = usePrefix('workspace-panel')
   return <div className={prefix}>{props.children}</div>
 }
 
-WorkspacePanel.Item = (props) => {
+WorkspacePanelInner.Item = (props) => {
   const prefix = usePrefix('workspace-panel-item')
   return (
     <div
@@ -28,4 +28,8 @@ WorkspacePanel.Item = (props) => {
       {props.children}
     </div>
   )
+}
+
+export const WorkspacePanel = WorkspacePanelInner as  React.FC & {
+  Item: React.FC<IWorkspaceItemProps>
 }

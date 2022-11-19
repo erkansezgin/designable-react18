@@ -32,7 +32,7 @@ export const Helpers: React.FC<IHelpersProps> = ({ node, nodeRect }) => {
   const [position, setPosition] = useState('top-right')
 
   useLayoutEffect(() => {
-    let request = null
+    let request:any = null
 
     const getYInViewport = (nodeRect: DOMRect, helpersRect: DOMRect) => {
       if (nodeRect.top - viewport.scrollY > helpersRect.height) {
@@ -102,7 +102,7 @@ export const Helpers: React.FC<IHelpersProps> = ({ node, nodeRect }) => {
       className={cls(prefix, {
         [position]: true,
       })}
-      ref={ref}
+      ref={ref as any}
     >
       <div className={cls(prefix + '-content')}>
         <Selector node={node} />

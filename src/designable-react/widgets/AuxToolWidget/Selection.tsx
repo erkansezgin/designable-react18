@@ -42,7 +42,7 @@ export const SelectionBox: React.FC<ISelectionBoxProps> = (props) => {
   if (!nodeRect.width || !nodeRect.height) return null
 
   const selectionId = {
-    [designer.props?.nodeSelectionIdAttrName]: props.node.id,
+    [designer.props?.nodeSelectionIdAttrName as any]: props.node.id,
   }
 
   return (

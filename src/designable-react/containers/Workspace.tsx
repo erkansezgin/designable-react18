@@ -1,11 +1,11 @@
 import React, { useMemo, useRef, Fragment } from 'react'
 import { useDesigner } from '../hooks'
 import { WorkspaceContext } from '../context'
-import { uid } from '@designable/shared'
 export interface IWorkspaceProps {
   id?: string
   title?: string
   description?: string
+  children?: React.ReactNode
 }
 
 export const Workspace: React.FC<IWorkspaceProps> = ({
@@ -33,7 +33,7 @@ export const Workspace: React.FC<IWorkspaceProps> = ({
   }, [id, designer])
   return (
     <Fragment>
-      <WorkspaceContext.Provider value={workspace}>
+      <WorkspaceContext.Provider value={workspace as any}>
         {props.children}
       </WorkspaceContext.Provider>
     </Fragment>

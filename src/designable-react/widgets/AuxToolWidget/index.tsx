@@ -1,11 +1,8 @@
-import React, { useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import {
   useViewport,
-  useCursor,
-  useDragon,
   useDesigner,
   usePrefix,
-  useOperation,
 } from '../../hooks'
 import { Insertion } from './Insertion'
 import { Selection } from './Selection'
@@ -30,7 +27,7 @@ export const AuxToolWidget = () => {
   if (!viewport) return null
 
   return (
-    <div ref={ref} className={prefix}>
+    <div ref={ref as any} className={prefix}>
       <Insertion />
       <DashedBox />
       <Selection />
