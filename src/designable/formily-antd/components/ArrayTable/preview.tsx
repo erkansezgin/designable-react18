@@ -1,14 +1,7 @@
 import React from 'react'
 import { Table, TableProps } from 'antd'
 import { TreeNode, createBehavior, createResource } from '@designable/core'
-import {
-  useTreeNode,
-  TreeNodeWidget,
-  DroppableWidget,
-  useNodeIdProps,
-  DnFC,
-} from '@designable/react'
-import { ArrayBase } from '@formily/antd'
+import { ArrayBase as ArrayBaseFormily } from '@formily/antd'
 import { observer } from '@formily/react'
 import { LoadTemplate } from '../../common/LoadTemplate'
 import cls from 'classnames'
@@ -24,9 +17,11 @@ import './styles.less'
 import { createVoidFieldSchema } from '../Field'
 import { AllSchemas } from '../../schemas'
 import { AllLocales } from '../../locales'
+import { DnFC, useTreeNode, useNodeIdProps, DroppableWidget, TreeNodeWidget } from '../../../react'
 
 const ensureObjectItemsNode = createEnsureTypeItemsNode('object')
 
+const ArrayBase = ArrayBaseFormily as any
 const HeaderCell: React.FC = (props: any) => {
   return (
     <th
@@ -49,7 +44,7 @@ const BodyCell: React.FC = (props: any) => {
   )
 }
 
-export const ArrayTable: DnFC<TableProps<any>> = observer((props) => {
+export const ArrayTable: DnFC<TableProps<any> & { className?: string }> = observer((props) => {
   const node = useTreeNode()
   const nodeId = useNodeIdProps()
   useDropTemplate('ArrayTable', (source) => {
@@ -101,7 +96,9 @@ export const ArrayTable: DnFC<TableProps<any>> = observer((props) => {
         },
       },
       children: source.map((node) => {
-        node.props.title = undefined
+        if (node.props) {
+          node.props.title = undefined
+        }
         return node
       }),
     })
@@ -166,11 +163,11 @@ export const ArrayTable: DnFC<TableProps<any>> = observer((props) => {
     'ArrayTable.Addition',
   ])
   const defaultRowKey = () => {
-    return node.id
+    return node?.id
   }
 
   const renderTable = () => {
-    if (node.children.length === 0) return <DroppableWidget />
+    if (node?.children.length === 0) return <DroppableWidget />
     return (
       <ArrayBase disabled>
         <Table
@@ -178,9 +175,9 @@ export const ArrayTable: DnFC<TableProps<any>> = observer((props) => {
           bordered
           {...props}
           scroll={{ x: '100%' }}
-          className={cls('ant-formily-array-table', props.className)}
-          style={{ marginBottom: 10, ...props.style }}
-          rowKey={defaultRowKey}
+          className={cls('ant-formily-array-table', (props as any).className)}
+          style={{ marginBottom: 10, ...(props as any).style }}
+          rowKey={defaultRowKey as any}
           dataSource={[{ id: '1' }]}
           pagination={false}
           components={{
@@ -196,7 +193,7 @@ export const ArrayTable: DnFC<TableProps<any>> = observer((props) => {
             const children = node.children.map((child) => {
               return <TreeNodeWidget node={child} key={child.id} />
             })
-            const props = node.props['x-component-props']
+            const props = node.props?.['x-component-props']
             return (
               <Table.Column
                 {...props}
@@ -231,7 +228,9 @@ export const ArrayTable: DnFC<TableProps<any>> = observer((props) => {
 
   useDropTemplate('ArrayTable.Column', (source) => {
     return source.map((node) => {
-      node.props.title = undefined
+      if (node.props){
+        node.props.title = undefined
+      }
       return node
     })
   })
@@ -242,7 +241,7 @@ export const ArrayTable: DnFC<TableProps<any>> = observer((props) => {
       <LoadTemplate
         actions={[
           {
-            title: node.getMessage('addSortHandle'),
+            title: node?.getMessage('addSortHandle'),
             icon: 'AddSort',
             onClick: () => {
               if (
@@ -277,7 +276,7 @@ export const ArrayTable: DnFC<TableProps<any>> = observer((props) => {
             },
           },
           {
-            title: node.getMessage('addIndex'),
+            title: node?.getMessage('addIndex'),
             icon: 'AddIndex',
             onClick: () => {
               if (
@@ -322,7 +321,7 @@ export const ArrayTable: DnFC<TableProps<any>> = observer((props) => {
             },
           },
           {
-            title: node.getMessage('addColumn'),
+            title: node?.getMessage('addColumn'),
             icon: 'AddColumn',
             onClick: () => {
               const operationNode = findNodeByComponentPath(node, [
@@ -355,7 +354,7 @@ export const ArrayTable: DnFC<TableProps<any>> = observer((props) => {
             },
           },
           {
-            title: node.getMessage('addOperation'),
+            title: node?.getMessage('addOperation'),
             icon: 'AddOperation',
             onClick: () => {
               const oldOperationNode = findNodeByComponentPath(node, [
@@ -434,11 +433,11 @@ ArrayBase.mixin(ArrayTable)
 ArrayTable.Behavior = createBehavior(createArrayBehavior('ArrayTable'), {
   name: 'ArrayTable.Column',
   extends: ['Field'],
-  selector: (node) => node.props['x-component'] === 'ArrayTable.Column',
+  selector: (node) => node.props?.['x-component'] === 'ArrayTable.Column',
   designerProps: {
     droppable: true,
     allowDrop: (node) =>
-      node.props['type'] === 'object' &&
+      node.props?.['type'] === 'object' &&
       node.parent?.props?.['x-component'] === 'ArrayTable',
     propsSchema: createVoidFieldSchema(AllSchemas.ArrayTable.Column),
   },

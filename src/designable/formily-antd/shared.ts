@@ -41,7 +41,7 @@ export const includesComponent = (
 }
 
 export const queryNodesByComponentPath = (
-  node: TreeNode | undefined,
+  node: TreeNode | undefined | null,
   path: ComponentNameMatcher[]
 ): TreeNode[] => {
   if (path?.length === 0) return []
@@ -78,7 +78,7 @@ export const findNodeByComponentPath = (
 }
 
 export const hasNodeByComponentPath = (
-  node: TreeNode | undefined,
+  node: TreeNode | undefined | null,
   path: ComponentNameMatcher[]
 ) => !!findNodeByComponentPath(node, path)
 
