@@ -1,4 +1,4 @@
-export default {
+const locales = {
   'zh-CN': {
     save: '保存',
     submit: '提交',
@@ -14,3 +14,5 @@ export default {
     publish: 'Publish',
   },
 }
+
+export default locales

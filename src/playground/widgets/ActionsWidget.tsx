@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { Space, Button, Radio } from 'antd'
 import { GithubOutlined } from '@ant-design/icons'
 import { GlobalRegistry } from '@designable/core'
@@ -10,13 +10,13 @@ export const ActionsWidget = observer(() => {
   const designer = useDesigner()
   useEffect(() => {
     loadInitialSchema(designer)
-  }, [])
+  }, [designer])
   const supportLocales = ['zh-cn', 'en-us', 'ko-kr']
   useEffect(() => {
     if (!supportLocales.includes(GlobalRegistry.getDesignerLanguage())) {
       GlobalRegistry.setDesignerLanguage('zh-cn')
     }
-  }, [])
+  }, [supportLocales])
   return (
     <Space style={{ marginRight: 10 }}>
       <Button href="https://designable-fusion.formilyjs.org">

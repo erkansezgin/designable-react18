@@ -7,11 +7,12 @@ const logo = {
 }
 
 export const LogoWidget: React.FC = () => {
-  const theme = useTheme() as "dark"|"light"
+  const theme = useTheme() as "dark" | "light"
   const url = logo[theme]
   return (
     <div style={{ display: 'flex', alignItems: 'center', fontSize: 14 }}>
       <img
+        alt=""
         src={url}
         style={{ margin: '12px 8px', height: 18, width: 'auto' }}
       />
