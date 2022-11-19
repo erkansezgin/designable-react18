@@ -1,16 +1,16 @@
 import React, { Fragment, useMemo } from 'react'
-import { usePrefix } from '@designable/react'
 import { camelCase } from '@formily/shared'
 import { Select } from '@formily/antd'
 import { observable } from '@formily/reactive'
 import { Field as FieldType } from '@formily/core'
 import { useField, Field, observer } from '@formily/react'
-import { FoldItemInner } from '../FoldItem'
+import { FoldItem } from '../FoldItem'
 import { ColorInput } from '../ColorInput'
 import { SizeInput } from '../SizeInput'
 import { PositionInput } from '../PositionInput'
 import cls from 'classnames'
 import './styles.less'
+import { usePrefix } from '../../../designable-react'
 
 const Positions = ['center', 'top', 'right', 'bottom', 'left']
 
@@ -84,8 +84,8 @@ export const BorderStyleSetter: React.FC<IBorderStyleSetterProps> = observer(
     }
 
     return (
-      <FoldItemInner label={field.title}>
-        <FoldItemInner.Extra>
+      <FoldItem label={field.title}>
+        <FoldItem.Extra>
           <div className={cls(prefix, className)} style={style}>
             <div className={prefix + '-position'}>
               <PositionInput
@@ -123,8 +123,8 @@ export const BorderStyleSetter: React.FC<IBorderStyleSetterProps> = observer(
               })}
             </div>
           </div>
-        </FoldItemInner.Extra>
-      </FoldItemInner>
+        </FoldItem.Extra>
+      </FoldItem>
     )
   }
 )

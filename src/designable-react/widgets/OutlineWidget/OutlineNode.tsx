@@ -113,7 +113,7 @@ export const OutlineTreeNode: React.FC<IOutlineTreeNodeProps> = observer(
     }
 
     const renderTitle = (node: TreeNode) => {
-      if (isFn(ctx.renderTitle)) return ctx.renderTitle(node)
+      if (isFn(ctx?.renderTitle)) return ctx?.renderTitle(node)
       return (
         <span>
           <NodeTitleWidget node={node} />
@@ -122,7 +122,7 @@ export const OutlineTreeNode: React.FC<IOutlineTreeNodeProps> = observer(
     }
 
     const renderActions = (node: TreeNode) => {
-      if (isFn(ctx.renderActions)) return ctx.renderActions(node)
+      if (isFn(ctx?.renderActions)) return ctx?.renderActions(node)
     }
 
     return (

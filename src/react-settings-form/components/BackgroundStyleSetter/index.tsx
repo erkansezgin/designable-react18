@@ -1,7 +1,7 @@
 import React from 'react'
 import { useField, Field, observer } from '@formily/react'
 import { Select, Input, IFormItemProps } from '@formily/antd'
-import { FoldItemInner as FoldItemFormily } from '../FoldItem'
+import { FoldItem} from '../FoldItem'
 import { ColorInput } from '../ColorInput'
 import { BackgroundSizeInput } from '../SizeInput'
 import { BackgroundImageInput } from '../ImageInput'
@@ -13,8 +13,6 @@ export interface IBackgroundStyleSetterProps {
   className?: string
   style?: React.CSSProperties
 }
-
-const FoldItem = FoldItemFormily as any
 
 export const BackgroundStyleSetter: React.FC<IBackgroundStyleSetterProps> =
   observer((props) => {

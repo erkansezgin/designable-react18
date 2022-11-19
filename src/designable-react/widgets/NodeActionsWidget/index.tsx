@@ -28,7 +28,7 @@ export const NodeActionsWidget: React.FC<INodeActionsWidgetProps> & {
   const node = useTreeNode()
   const prefix = usePrefix('node-actions')
   const selected = useSelected()
-  if (selected.indexOf(node.id) === -1 && props.activeShown) return null
+  if (selected.indexOf(node?.id as any) === -1 && props.activeShown) return null
   return (
     <div className={cls(prefix, props.className)} style={props.style}>
       <div className={prefix + '-content'}>
