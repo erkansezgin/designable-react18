@@ -144,10 +144,10 @@ export const ReactionsSetter: React.FC<IReactionsSetterProps> = (props) => {
     return createForm({
       values: clone(props.value),
     })
-  }, [modalVisible, props.value])
+  }, [props.value])
   const formCollapse = useMemo(
     () => FormCollapse.createFormCollapse && FormCollapse.createFormCollapse(['deps', 'state']),
-    [modalVisible]
+    []
   )
   const openModal = () => setModalVisible(true)
   const closeModal = () => setModalVisible(false)
@@ -179,7 +179,7 @@ export const ReactionsSetter: React.FC<IReactionsSetterProps> = (props) => {
         bodyStyle={{ padding: 10 }}
         transitionName=""
         maskTransitionName=""
-        visible={modalVisible}
+        open={modalVisible}
         onCancel={closeModal}
         destroyOnClose
         onOk={() => {
