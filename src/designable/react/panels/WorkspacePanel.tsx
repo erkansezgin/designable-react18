@@ -30,7 +30,6 @@ WorkspacePanelInner.Item = (props) => {
   )
 }
 
-export const WorkspacePanel = WorkspacePanelInner as  React.FC & {
+export const WorkspacePanel = WorkspacePanelInner as React.FC<{ children?: React.ReactNode }> & {
   Item: React.FC<IWorkspaceItemProps>,
-  children?: React.ReactNode
 }

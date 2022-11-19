@@ -1,6 +1,5 @@
 import React from 'react'
-import { useTheme } from '@designable/react'
-
+import { useTheme } from '../../designable/react'
 const logo = {
   dark: '//img.alicdn.com/imgextra/i2/O1CN01NTUDi81fHLQvZCPnc_!!6000000003981-55-tps-1141-150.svg',
   light:
@@ -8,7 +7,8 @@ const logo = {
 }
 
 export const LogoWidget: React.FC = () => {
-  const url = logo[useTheme()]
+  const theme = useTheme() as "dark"|"light"
+  const url = logo[theme]
   return (
     <div style={{ display: 'flex', alignItems: 'center', fontSize: 14 }}>
       <img
