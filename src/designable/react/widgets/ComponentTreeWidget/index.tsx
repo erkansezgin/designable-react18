@@ -82,7 +82,7 @@ export const ComponentTreeWidget: React.FC<IComponentTreeWidgetProps> =
     }
     useEffect(() => {
       GlobalRegistry.registerDesignerBehaviors(props.components)
-    }, [])
+    }, [props.components])
     return (
       <div
         style={{ ...props.style, ...tree?.props?.style }}

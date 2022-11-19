@@ -6,17 +6,19 @@ import { observer } from '@formily/react'
 import { loadInitialSchema, saveSchema } from '../service'
 import { useDesigner, TextWidget } from '../../designable/react'
 
+const supportLocales = ['zh-cn', 'en-us', 'ko-kr']
+
 export const ActionsWidget = observer(() => {
   const designer = useDesigner()
   useEffect(() => {
     loadInitialSchema(designer)
   }, [designer])
-  const supportLocales = ['zh-cn', 'en-us', 'ko-kr']
+
   useEffect(() => {
     if (!supportLocales.includes(GlobalRegistry.getDesignerLanguage())) {
       GlobalRegistry.setDesignerLanguage('zh-cn')
     }
-  }, [supportLocales])
+  }, [])
   return (
     <Space style={{ marginRight: 10 }}>
       <Button href="https://designable-fusion.formilyjs.org">
