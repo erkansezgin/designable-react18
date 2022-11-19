@@ -4,12 +4,12 @@ import { Modal, Button } from 'antd'
 import { Form } from '@formily/core'
 import { observable } from '@formily/reactive'
 import { observer } from '@formily/reactive-react'
-import { usePrefix, useTheme, TextWidget } from '@designable/react'
 import { DataSettingPanel } from './DataSettingPanel'
 import { TreePanel } from './TreePanel'
 import { transformDataToValue, transformValueToData } from './shared'
 import { IDataSourceItem, ITreeDataSource } from './types'
 import './styles.less'
+import { useTheme, usePrefix, TextWidget } from '../../../../react'
 export interface IDataSourceSetterProps {
   className?: string
   style?: React.CSSProperties
@@ -75,7 +75,7 @@ export const DataSourceSetter: React.FC<IDataSourceSetterProps> = observer(
           >
             <div className={`${prefix + '-layout-item left'}`}>
               <TreePanel
-                defaultOptionValue={defaultOptionValue}
+                defaultOptionValue={defaultOptionValue as any}
                 allowTree={allowTree}
                 treeDataSource={treeDataSource}
               ></TreePanel>

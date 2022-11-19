@@ -1,19 +1,19 @@
 import React from 'react'
 import { clone, toArr } from '@formily/shared'
 import { observer } from '@formily/reactive-react'
-import { IconWidget, TextWidget, usePrefix } from '@designable/react'
 import { INodeItem, ITreeDataSource } from './types'
 import { traverseTree } from './shared'
 import './styles.less'
+import { usePrefix, TextWidget, IconWidget } from '../../../../react'
 export interface ITitleProps extends INodeItem {
   treeDataSource: ITreeDataSource
 }
 
 export const Title: React.FC<ITitleProps> = observer((props) => {
   const prefix = usePrefix('data-source-setter-node-title')
-  const getTitleValue = (dataSource) => {
+  const getTitleValue = (dataSource: any) => {
     const optionalKeys = ['label', 'title', 'header']
-    let nodeTitle: string
+    let nodeTitle: string | undefined
     optionalKeys.some((key) => {
       const title = toArr(dataSource).find((item) => item.label === key)?.value
       if (title !== undefined) {
@@ -34,7 +34,7 @@ export const Title: React.FC<ITitleProps> = observer((props) => {
     return nodeTitle
   }
 
-  const renderTitle = (dataSource) => {
+  const renderTitle = (dataSource: any) => {
     const nodeTitle = getTitleValue(dataSource)
     if (nodeTitle === undefined)
       return (

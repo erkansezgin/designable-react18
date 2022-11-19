@@ -2,15 +2,15 @@ import React, { Fragment } from 'react'
 import { Tree, Button, TreeProps } from 'antd'
 import { uid } from '@formily/shared'
 import { observer } from '@formily/reactive-react'
-import { usePrefix, TextWidget, IconWidget } from '@designable/react'
 import { Title } from './Title'
 import { Header } from './Header'
 import { traverseTree } from './shared'
 import { ITreeDataSource, INodeItem } from './types'
 import './styles.less'
 import { GlobalRegistry } from '@designable/core'
+import { usePrefix, TextWidget, IconWidget } from '../../../../react'
 
-const limitTreeDrag = ({ dropPosition }) => {
+const limitTreeDrag = ({ dropPosition }: any) => {
   if (dropPosition === 0) {
     return false
   }
@@ -28,14 +28,14 @@ export interface ITreePanelProps {
 
 export const TreePanel: React.FC<ITreePanelProps> = observer((props) => {
   const prefix = usePrefix('data-source-setter')
-  const dropHandler = (info: Parameters<TreeProps['onDrop']>[0]) => {
+  const dropHandler = (info: any/*Parameters<TreeProps['onDrop']>[0]*/) => {
     const dropKey = info.node?.key
     const dragKey = info.dragNode?.key
     const dropPos = info.node.pos.split('-')
     const dropPosition = info.dropPosition - Number(dropPos[dropPos.length - 1])
     const data = [...props.treeDataSource.dataSource]
     // Find dragObject
-    let dragObj: INodeItem
+    let dragObj: INodeItem|undefined = undefined
     traverseTree(data, (item, index, arr) => {
       if (arr[index].key === dragKey) {
         arr.splice(index, 1)
@@ -46,7 +46,7 @@ export const TreePanel: React.FC<ITreePanelProps> = observer((props) => {
       traverseTree(data, (item) => {
         if (item.key === dropKey) {
           item.children = item.children || []
-          item.children.unshift(dragObj)
+          item.children.unshift(dragObj as any)
         }
       })
     } else if (
@@ -57,12 +57,12 @@ export const TreePanel: React.FC<ITreePanelProps> = observer((props) => {
       traverseTree(data, (item) => {
         if (item.key === dropKey) {
           item.children = item.children || []
-          item.children.unshift(dragObj)
+          item.children.unshift(dragObj as any)
         }
       })
     } else {
-      let ar: any[]
-      let i: number
+      let ar: any[] = []
+      let i: number = 0
       traverseTree(data, (item, index, arr) => {
         if (item.key === dropKey) {
           ar = arr
@@ -92,14 +92,14 @@ export const TreePanel: React.FC<ITreePanelProps> = observer((props) => {
               const initialKeyValuePairs = props.defaultOptionValue?.map(
                 (item) => ({ ...item })
               ) || [
-                {
-                  label: 'label',
-                  value: `${GlobalRegistry.getDesignerMessage(
-                    `SettingComponents.DataSourceSetter.item`
-                  )} ${dataSource.length + 1}`,
-                },
-                { label: 'value', value: uuid },
-              ]
+                  {
+                    label: 'label',
+                    value: `${GlobalRegistry.getDesignerMessage(
+                      `SettingComponents.DataSourceSetter.item`
+                    )} ${dataSource.length + 1}`,
+                  },
+                  { label: 'value', value: uuid },
+                ]
               props.treeDataSource.dataSource = dataSource.concat({
                 key: uuid,
                 duplicateKey: uuid,
@@ -123,7 +123,7 @@ export const TreePanel: React.FC<ITreePanelProps> = observer((props) => {
           autoExpandParent
           showLine={{ showLeafIcon: false }}
           treeData={props.treeDataSource.dataSource}
-          onDragEnter={() => {}}
+          onDragEnter={() => { }}
           onDrop={dropHandler}
           titleRender={(titleProps: INodeItem) => {
             return (

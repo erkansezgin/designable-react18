@@ -1,4 +1,4 @@
-import { MonacoInput, getNpmCDNRegistry } from '@designable/react-settings-form'
+import { getNpmCDNRegistry, MonacoInput } from "../../../../react-settings-form"
 
 export interface IDependency {
   name: string
@@ -17,7 +17,7 @@ const loadDependencies = async (deps: IDependency[]) => {
   )
 }
 
-MonacoInput.loader.init().then(async (monaco) => {
+MonacoInput.loader?.init().then(async (monaco:any) => {
   const deps = await loadDependencies([
     { name: '@formily/core', path: 'dist/formily.core.all.d.ts' },
   ])
