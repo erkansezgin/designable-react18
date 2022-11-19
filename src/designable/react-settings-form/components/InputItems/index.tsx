@@ -45,7 +45,7 @@ InputItems.defaultProps = {
   width: '100%',
 }
 
-InputItems.Item = (props) => {
+const Item = (props:any) => {
   const prefix = usePrefix('input-items-item')
   const ctx = useContext(InputItemsContext)
   return (
@@ -65,3 +65,5 @@ InputItems.Item = (props) => {
     </div>
   )
 }
+
+InputItems.Item = Item

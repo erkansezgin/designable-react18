@@ -127,7 +127,7 @@ export const IconWidget: React.FC<IIconWidgetProps> & {
   )
 })
 
-IconWidget.ShadowSVG = (props) => {
+const ShadowSVG = (props: any) => {
   const ref = useRef<HTMLDivElement>()
   const width = isNumSize(props.width) ? `${props.width}px` : props.width
   const height = isNumSize(props.height) ? `${props.height}px` : props.height
@@ -141,7 +141,7 @@ IconWidget.ShadowSVG = (props) => {
   }, [])
   return <div ref={ref as any}></div>
 }
-
+IconWidget.ShadowSVG = ShadowSVG
 IconWidget.Provider = (props) => {
   return (
     <IconContext.Provider value={props}>{(props as any)?.children}</IconContext.Provider>

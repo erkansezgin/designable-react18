@@ -16,7 +16,7 @@ export interface INodeActionsWidgetProps {
 
 export interface INodeActionsWidgetActionProps
   extends Omit<React.ComponentProps<'a'>, 'title' | 'type' | 'ref'>,
-    Partial<TypographyProps['Link']> {
+  Partial<TypographyProps['Link']> {
   className?: string
   style?: React.CSSProperties
   title: React.ReactNode
@@ -40,7 +40,7 @@ const NodeActionsWidgetInner: React.FC<INodeActionsWidgetProps> & {
   )
 })
 
-NodeActionsWidgetInner.Action = ({ icon, title, ...props }) => {
+const Action = ({ icon, title, ...props }: any) => {
   const prefix = usePrefix('node-actions-item')
   return (
     <Typography.Link
@@ -56,6 +56,7 @@ NodeActionsWidgetInner.Action = ({ icon, title, ...props }) => {
   )
 }
 
+NodeActionsWidgetInner.Action = Action
 export const NodeActionsWidget = NodeActionsWidgetInner as React.FC<INodeActionsWidgetProps> & {
   Action: React.FC<INodeActionsWidgetActionProps>
 } 

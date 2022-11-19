@@ -13,8 +13,7 @@ const WorkspacePanelInner: React.FC & {
   const prefix = usePrefix('workspace-panel')
   return <div className={prefix}>{props.children}</div>
 }
-
-WorkspacePanelInner.Item = (props) => {
+const Item = (props:any) => {
   const prefix = usePrefix('workspace-panel-item')
   return (
     <div
@@ -30,6 +29,7 @@ WorkspacePanelInner.Item = (props) => {
   )
 }
 
+WorkspacePanelInner.Item = Item
 export const WorkspacePanel = WorkspacePanelInner as React.FC<{ children?: React.ReactNode }> & {
   Item: React.FC<IWorkspaceItemProps>,
 }

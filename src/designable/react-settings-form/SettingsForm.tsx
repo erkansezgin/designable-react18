@@ -5,7 +5,7 @@ import { observer } from '@formily/react'
 import { SchemaField } from './SchemaField'
 import { ISettingFormProps } from './types'
 import { SettingsFormContext } from './shared/context'
-import { useLocales, useSnapshot } from './effects'
+import { getLocales, getSnapshot } from './effects'
 import { Empty } from 'antd'
 import cls from 'classnames'
 import './styles.less'
@@ -37,8 +37,8 @@ export const SettingsForm: React.FC<ISettingFormProps> = observer(
         initialValues: node?.designerProps?.defaultProps,
         values: node?.props,
         effects(form) {
-          useLocales(node)
-          useSnapshot(operation)
+          getLocales(node)
+          getSnapshot(operation)
           props.effects?.(form)
         },
       })

@@ -3,7 +3,7 @@ import { onFieldInputValueChange } from '@formily/core'
 
 let timeRequest:any = null
 
-export const useSnapshot = (operation: Operation) => {
+export const getSnapshot = (operation: Operation) => {
   onFieldInputValueChange('*', () => {
     clearTimeout(timeRequest)
     timeRequest = setTimeout(() => {

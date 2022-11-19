@@ -25,7 +25,7 @@ const mapEnum = (dataSource: any[]) => (item: any, index: number) => {
   }
 }
 
-export const useLocales = (node: TreeNode) => {
+export const getLocales = (node: TreeNode) => {
   onFieldReact('*', (field: any) => {
     const path = field.path.toString().replace(/\.[\d+]/g, '')
     const takeMessage = (prop?: string) => {

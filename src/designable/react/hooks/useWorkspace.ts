@@ -6,7 +6,8 @@ import { globalThisPolyfill } from '@designable/shared'
 
 export const useWorkspace = (id?: string): Workspace => {
   const designer = useDesigner()
-  const workspaceId = id || useContext(WorkspaceContext)?.id
+  const context = useContext(WorkspaceContext)
+  const workspaceId = id || context?.id
   if (workspaceId) {
     return designer.workbench.findWorkspaceById(workspaceId)
   }
