@@ -22,21 +22,21 @@ export const Viewport: React.FC<IViewportProps> = ({
   const viewportRef = useRef<ViewportType>()
   const isFrameRef = useRef(false)
   useLayoutEffect(() => {
-    const frameElement = ref.current.querySelector('iframe')
+    const frameElement = ref.current?.querySelector('iframe')
     if (!viewport) return
     if (viewportRef.current && viewportRef.current !== viewport) {
       viewportRef.current.onUnmount()
     }
     if (frameElement) {
       frameElement.addEventListener('load', () => {
-        viewport.onMount(frameElement, frameElement.contentWindow)
+        viewport.onMount(frameElement, frameElement.contentWindow as any)
         requestIdle(() => {
           isFrameRef.current = true
           setLoaded(true)
         })
       })
     } else {
-      viewport.onMount(ref.current, globalThisPolyfill)
+      viewport.onMount(ref.current as any, globalThisPolyfill)
       requestIdle(() => {
         isFrameRef.current = false
         setLoaded(true)
@@ -51,7 +51,7 @@ export const Viewport: React.FC<IViewportProps> = ({
   return (
     <div
       {...props}
-      ref={ref}
+      ref={ref as any}
       className={cls(prefix, props.className)}
       style={{
         opacity: !loaded ? 0 : 1,

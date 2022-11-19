@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { Button } from 'antd'
-import { usePrefix, IconWidget } from '@designable/react'
 import cls from 'classnames'
 import './styles.less'
+import { IconWidget, usePrefix } from '../../../designable-react'
 
 export interface IInput {
   style?: React.CSSProperties
@@ -63,11 +63,11 @@ export function createPolyInput(polyTypes: PolyTypes = []): React.FC<IInput> {
     ...props
   }) => {
     const prefix = usePrefix('poly-input')
-    const types = createTypes(polyTypes, exclude, include)
+    const types = createTypes(polyTypes, exclude as any, include as any)
     const [current, setCurrent] = useState(types[0]?.type)
     const type = types?.find(({ type }) => type === current)
     const component = type?.component
-    const typesValue = useRef({})
+    const typesValue = useRef<any>({})
     useEffect(() => {
       types?.forEach(({ checker, type }) => {
         if (checker(value)) {
