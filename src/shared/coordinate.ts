@@ -81,9 +81,9 @@ export function isCrossRectInRect(target: IRect, source: IRect) {
   )
   return (
     Math.abs(targetCenterPoint.x - sourceCenterPoint.x) <=
-      target.width / 2 + source.width / 2 &&
+    target.width / 2 + source.width / 2 &&
     Math.abs(targetCenterPoint.y - sourceCenterPoint.y) <=
-      target.height / 2 + source.height / 2
+    target.height / 2 + source.height / 2
   )
 }
 
@@ -157,7 +157,7 @@ export function isNearAfter(point: IPoint, rect: IRect, inline = false) {
     return (
       Math.abs(point.x - rect.x) + Math.abs(point.y - rect.y) >
       Math.abs(point.x - (rect.x + rect.width)) +
-        Math.abs(point.y - (rect.y + rect.height))
+      Math.abs(point.y - (rect.y + rect.height))
     )
   }
   return Math.abs(point.y - rect.y) > Math.abs(point.y - (rect.y + rect.height))
@@ -188,9 +188,10 @@ export function calcBoundingRect(rects: IRect[]) {
   let minLeft = Infinity
   let maxRight = -Infinity
   rects.forEach((item) => {
-    const rect =
+    const rect =(
       typeof DOMRect !== 'undefined' &&
       new DOMRect(item.x, item.y, item.width, item.height)
+    ) as DOMRect
     if (rect.top <= minTop) {
       minTop = rect.top
     }

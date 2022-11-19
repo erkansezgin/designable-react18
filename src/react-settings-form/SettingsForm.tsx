@@ -2,16 +2,7 @@ import React, { useMemo } from 'react'
 import { createForm } from '@formily/core'
 import { Form } from '@formily/antd'
 import { observer } from '@formily/react'
-import { requestIdle, cancelIdle } from '@designable/shared'
-import {
-  usePrefix,
-  useSelected,
-  useOperation,
-  useCurrentNode,
-  useWorkbench,
-  IconWidget,
-  NodePathWidget,
-} from '@designable/react'
+import { requestIdle, cancelIdle } from '../shared'
 import { SchemaField } from './SchemaField'
 import { ISettingFormProps } from './types'
 import { SettingsFormContext } from './shared/context'
@@ -19,6 +10,7 @@ import { useLocales, useSnapshot } from './effects'
 import { Empty } from 'antd'
 import cls from 'classnames'
 import './styles.less'
+import { useWorkbench, useOperation, useCurrentNode, useSelected, usePrefix, IconWidget, NodePathWidget } from '../designable-react'
 
 const GlobalState = {
   idleRequest: null,
@@ -86,22 +78,22 @@ export const SettingsForm: React.FC<ISettingFormProps> = observer(
         </div>
       )
     }
-
+    const IconWidgetProvider = IconWidget.Provider as any
     return (
-      <IconWidget.Provider tooltip>
+      <IconWidgetProvider tooltip>
         <div className={prefix + '-wrapper'}>
           {!isEmpty && <NodePathWidget workspaceId={currentWorkspaceId} />}
           <div className={prefix + '-content'}>{render()}</div>
         </div>
-      </IconWidget.Provider>
+      </IconWidgetProvider>
     )
   },
   {
     scheduler: (update) => {
-      cancelIdle(GlobalState.idleRequest)
+      cancelIdle(GlobalState.idleRequest as any)
       GlobalState.idleRequest = requestIdle(update, {
         timeout: 500,
-      })
+      }) as any
     },
   }
 )

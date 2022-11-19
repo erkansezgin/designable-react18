@@ -1,5 +1,5 @@
+import { globalThisPolyfill } from '../../shared'
 import { getNpmCDNRegistry } from '../registry'
-import { globalThisPolyfill } from '@designable/shared'
 export interface ILoadScriptProps {
   package: string
   entry: string
@@ -12,7 +12,7 @@ export const loadScript = async (props: ILoadScriptProps) => {
     base: getNpmCDNRegistry(),
     ...props,
   }
-  if (globalThisPolyfill[props.root]) return globalThisPolyfill[options.root]
+  if (globalThisPolyfill[props.root as any]) return globalThisPolyfill[options.root as any]
   const path = `${options.base}/${options.package}/${options.entry}`
   return new Promise((resolve, reject) => {
     const script = document.createElement('script')
@@ -20,16 +20,16 @@ export const loadScript = async (props: ILoadScriptProps) => {
     script.async = false
     script.src = path
     script.onload = () => {
-      const module = globalThisPolyfill[options.root]
-      globalThisPolyfill['define'] = define
+      const module = globalThisPolyfill[options.root as any]
+      globalThisPolyfill['define' as any] = define
       resolve(module)
       script.remove()
     }
     script.onerror = (err) => {
       reject(err)
     }
-    const define = globalThisPolyfill['define']
-    globalThisPolyfill['define'] = undefined
+    const define = globalThisPolyfill['define' as any]
+    globalThisPolyfill['define' as any] = undefined as any
     document.body.appendChild(script)
   })
 }
