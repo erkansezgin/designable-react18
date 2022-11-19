@@ -41,7 +41,7 @@ export const IconWidget: React.FC<IIconWidgetProps> & {
       if (finded) {
         return takeIcon(finded)
       }
-      return <img src={infer} height={height} width={width} />
+      return <img alt="" src={infer} height={height} width={width} />
     } else if (isFn(infer)) {
       return React.createElement(infer, {
         height,

@@ -26,6 +26,7 @@ const HeaderCell: React.FC = (props: any) => {
   return (
     <th
       {...props}
+      // eslint-disable-next-line no-useless-escape
       data-designer-node-id={props.className.match(/data-id\:([^\s]+)/)?.[1]}
     >
       {props.children}
@@ -37,6 +38,7 @@ const BodyCell: React.FC = (props: any) => {
   return (
     <td
       {...props}
+      // eslint-disable-next-line no-useless-escape
       data-designer-node-id={props.className.match(/data-id\:([^\s]+)/)?.[1]}
     >
       {props.children}

@@ -14,6 +14,6 @@ export const useDesigner = (effects?: IEffects): Engine => {
     if (isFn(effects)) {
       return effects(designer)
     }
-  }, [])
+  }, [designer, effects])
   return designer
 }
