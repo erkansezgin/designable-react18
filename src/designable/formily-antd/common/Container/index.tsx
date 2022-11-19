@@ -3,7 +3,7 @@ import { observer } from '@formily/reactive-react'
 import './styles.less'
 import { DroppableWidget } from '../../../react'
 
-export const Container: React.FC = observer((props) => {
+export const Container: React.FC<any> = observer((props) => {
   return <DroppableWidget>{props.children}</DroppableWidget>
 })
 

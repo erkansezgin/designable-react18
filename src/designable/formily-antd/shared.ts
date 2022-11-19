@@ -3,10 +3,10 @@ import { TreeNode, Engine } from '@designable/core'
 export type ComponentNameMatcher =
   | string
   | string[]
-  | ((name: string, node: TreeNode, context?: any) => boolean)
+  | ((name: string, node: TreeNode | undefined, context?: any) => boolean)
 
 export const matchComponent = (
-  node: TreeNode,
+  node: TreeNode | undefined | null,
   name: ComponentNameMatcher,
   context?: any
 ) => {
@@ -41,26 +41,26 @@ export const includesComponent = (
 }
 
 export const queryNodesByComponentPath = (
-  node: TreeNode,
+  node: TreeNode | undefined,
   path: ComponentNameMatcher[]
 ): TreeNode[] => {
   if (path?.length === 0) return []
   if (path?.length === 1) {
-    if (matchComponent(node, path[0])) {
+    if (node && matchComponent(node, path[0])) {
       return [node]
     }
   }
   return matchComponent(node, path[0])
-    ? node.children.reduce((buf, child) => {
-        return buf.concat(queryNodesByComponentPath(child, path.slice(1)))
-      }, [])
-    : []
+    ? node?.children.reduce((buf, child) => {
+      return buf.concat(queryNodesByComponentPath(child, path.slice(1)) as any)
+    }, [])
+    : [] as any
 }
 
 export const findNodeByComponentPath = (
-  node: TreeNode,
+  node: TreeNode | undefined | null,
   path: ComponentNameMatcher[]
-): TreeNode => {
+): TreeNode | undefined | null => {
   if (path?.length === 0) return
   if (path?.length === 1) {
     if (matchComponent(node, path[0])) {
@@ -68,8 +68,8 @@ export const findNodeByComponentPath = (
     }
   }
   if (matchComponent(node, path[0])) {
-    for (let i = 0; i < node.children.length; i++) {
-      const next = findNodeByComponentPath(node.children[i], path.slice(1))
+    for (let i = 0; i < (node?.children?.length || 0); i++) {
+      const next = findNodeByComponentPath(node?.children[i], path.slice(1))
       if (next) {
         return next
       }
@@ -78,7 +78,7 @@ export const findNodeByComponentPath = (
 }
 
 export const hasNodeByComponentPath = (
-  node: TreeNode,
+  node: TreeNode | undefined,
   path: ComponentNameMatcher[]
 ) => !!findNodeByComponentPath(node, path)
 
@@ -91,12 +91,12 @@ export const matchArrayItemsNode = (node: TreeNode) => {
 
 export const createNodeId = (designer: Engine, id: string) => {
   return {
-    [designer.props.nodeIdAttrName]: id,
+    [designer.props.nodeIdAttrName as any]: id,
   }
 }
 
-export const createEnsureTypeItemsNode = (type: string) => (node: TreeNode) => {
-  const objectNode = node.children.find((child) => child.props['type'] === type)
+export const createEnsureTypeItemsNode = (type: string) => (node?: TreeNode | undefined | null) => {
+  const objectNode = node?.children.find((child) => child.props?.['type'] === type)
   if (objectNode) {
     return objectNode
   } else {
@@ -106,7 +106,7 @@ export const createEnsureTypeItemsNode = (type: string) => (node: TreeNode) => {
         type,
       },
     })
-    node.prepend(newObjectNode)
+    node?.prepend(newObjectNode)
     return newObjectNode
   }
 }

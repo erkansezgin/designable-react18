@@ -13,15 +13,10 @@ import {
 import { FormItem } from '@formily/antd'
 import { each, reduce } from '@formily/shared'
 import { createBehavior } from '@designable/core'
-import {
-  useDesigner,
-  useTreeNode,
-  useComponents,
-  DnFC,
-} from '@designable/react'
 import { isArr, isStr } from '@designable/shared'
 import { Container } from '../../common/Container'
 import { AllLocales } from '../../locales'
+import { DnFC, useDesigner, useComponents, useTreeNode } from '../../../react'
 
 Schema.silent(true)
 
@@ -51,7 +46,7 @@ const NeedShownExpression = {
   default: true,
   'x-content': true,
   'x-value': true,
-}
+} as any
 
 const isExpression = (val: any) => isStr(val) && /^\{\{.*\}\}$/.test(val)
 
@@ -64,7 +59,7 @@ const filterExpression = (val: any) => {
         if (isExpression(value)) {
           return buf
         } else {
-          const results = filterExpression(value)
+          const results = filterExpression(value) as any
           if (results === undefined || results === null) return buf
           if (isArray) {
             return buf.concat([results])
@@ -90,7 +85,7 @@ const toDesignableFieldProps = (
   id: string
 ) => {
   const results: any = {}
-  each(SchemaStateMap, (fieldKey, schemaKey) => {
+  each(SchemaStateMap, (fieldKey, schemaKey:any) => {
     const value = schema[schemaKey]
     if (isExpression(value)) {
       if (!NeedShownExpression[schemaKey]) return
@@ -140,7 +135,7 @@ export const Field: DnFC<ISchema> = observer((props) => {
   const fieldProps = toDesignableFieldProps(
     props,
     components,
-    designer.props.nodeIdAttrName,
+    designer.props.nodeIdAttrName as any,
     node.id
   )
   if (props.type === 'object') {
@@ -153,7 +148,7 @@ export const Field: DnFC<ISchema> = observer((props) => {
     )
   } else if (props.type === 'array') {
     return <ArrayField {...fieldProps} name={node.id} />
-  } else if (node.props.type === 'void') {
+  } else if (node.props?.type === 'void') {
     return (
       <VoidField {...fieldProps} name={node.id}>
         {props.children}

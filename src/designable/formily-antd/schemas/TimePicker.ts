@@ -115,10 +115,10 @@ export const CommonTimePickerAPI = {
 
 export const TimePicker: ISchema & { RangePicker?: ISchema } = {
   type: 'object',
-  properties: CommonTimePickerAPI,
+  properties: CommonTimePickerAPI as any,
 }
 
 TimePicker.RangePicker = {
   type: 'object',
-  properties: CommonTimePickerAPI,
+  properties: CommonTimePickerAPI as any,
 }

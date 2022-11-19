@@ -93,7 +93,7 @@ export const DatePicker: ISchema & { RangePicker?: ISchema } = {
       'x-decorator': 'FormItem',
       'x-component': 'Switch',
     },
-  },
+  } as any,
 }
 
 DatePicker.RangePicker = {
@@ -114,5 +114,5 @@ DatePicker.RangePicker = {
       'x-decorator': 'FormItem',
       'x-component': 'Switch',
     },
-  },
+  } as any,
 }
