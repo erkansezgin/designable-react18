@@ -18,6 +18,7 @@ import './styles.less'
 import { DnFC, useTreeNode, useNodeIdProps, DroppableWidget, TreeNodeWidget } from '../../../react'
 
 const ensureObjectItemsNode = createEnsureTypeItemsNode('object')
+const ArrayBase = ArrayBaseFormily as any
 
 const isArrayCardsOperation = (name: string) =>
   name === 'ArrayCards.Remove' ||
@@ -98,7 +99,7 @@ export const ArrayCards: DnFC<CardProps> = observer((props) => {
       '*',
       (name) => name.indexOf('ArrayCards.') === -1,
     ])
-    const ArrayBase = ArrayBaseFormily as any
+
     return (
       <ArrayBase disabled>
         <ArrayBase.Item index={0} record={null}>
@@ -148,7 +149,7 @@ export const ArrayCards: DnFC<CardProps> = observer((props) => {
       <LoadTemplate
         actions={[
           {
-            title: node.getMessage('addIndex'),
+            title: node?.getMessage('addIndex'),
             icon: 'AddIndex',
             onClick: () => {
               if (
@@ -171,7 +172,7 @@ export const ArrayCards: DnFC<CardProps> = observer((props) => {
           },
 
           {
-            title: node.getMessage('addOperation'),
+            title: node?.getMessage('addOperation'),
             icon: 'AddOperation',
             onClick: () => {
               const oldAdditionNode = findNodeByComponentPath(node, [
@@ -180,7 +181,7 @@ export const ArrayCards: DnFC<CardProps> = observer((props) => {
               ])
               if (!oldAdditionNode) {
                 const additionNode = new TreeNode({
-                  componentName: node.componentName,
+                  componentName: node?.componentName,
                   props: {
                     type: 'void',
                     title: 'Addition',
@@ -207,7 +208,7 @@ export const ArrayCards: DnFC<CardProps> = observer((props) => {
               if (!oldRemoveNode) {
                 ensureObjectItemsNode(node).append(
                   new TreeNode({
-                    componentName: node.componentName,
+                    componentName: node?.componentName,
                     props: {
                       type: 'void',
                       'x-component': 'ArrayCards.Remove',
@@ -218,7 +219,7 @@ export const ArrayCards: DnFC<CardProps> = observer((props) => {
               if (!oldMoveDownNode) {
                 ensureObjectItemsNode(node).append(
                   new TreeNode({
-                    componentName: node.componentName,
+                    componentName: node?.componentName,
                     props: {
                       type: 'void',
                       'x-component': 'ArrayCards.MoveDown',
