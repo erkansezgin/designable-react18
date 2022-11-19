@@ -81,7 +81,7 @@ GlobalRegistry.registerDesignerLocales({
   },
 })
 
-export const App = () => {
+export const Playground = () => {
   const engine = useMemo(
     () =>
       createDesigner({
