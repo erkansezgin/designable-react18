@@ -1,8 +1,8 @@
 import React, { useRef } from 'react'
 import { Input, Popover } from 'antd'
-import { usePrefix } from '@designable/react'
 import { SketchPicker } from 'react-color'
 import './styles.less'
+import { usePrefix } from '../../../designable-react'
 
 export interface IColorInputProps {
   value?: string
@@ -14,7 +14,7 @@ export const ColorInput: React.FC<IColorInputProps> = (props) => {
   const prefix = usePrefix('color-input')
   const color = props.value as string
   return (
-    <div ref={container} className={prefix}>
+    <div ref={container as any} className={prefix}>
       <Input
         value={props.value}
         onChange={(e) => {
@@ -26,11 +26,11 @@ export const ColorInput: React.FC<IColorInputProps> = (props) => {
             autoAdjustOverflow
             trigger="click"
             overlayInnerStyle={{ padding: 0 }}
-            getPopupContainer={() => container.current}
+            getPopupContainer={() => container.current as any}
             content={
               <SketchPicker
                 color={color}
-                onChange={({ rgb }) => {
+                onChange={({ rgb }: any) => {
                   props.onChange?.(`rgba(${rgb.r},${rgb.g},${rgb.b},${rgb.a})`)
                 }}
               />

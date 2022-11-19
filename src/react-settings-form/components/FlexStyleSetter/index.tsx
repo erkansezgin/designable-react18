@@ -1,10 +1,10 @@
 import React from 'react'
 import { Field, useField, observer } from '@formily/react'
 import { Radio } from '@formily/antd'
-import { usePrefix, IconWidget } from '@designable/react'
 import { InputItems } from '../InputItems'
 import cls from 'classnames'
 import './styles.less'
+import { usePrefix, IconWidget } from '../../../designable-react'
 export interface IFlexStyleSetterProps {
   className?: string
   style?: React.CSSProperties
@@ -31,7 +31,7 @@ export const FlexStyleSetter: React.FC<IFlexStyleSetterProps> = observer(
               },
             ]}
             reactions={(field) => {
-              field.decorator[1].title = `Flex Direction : ${field.value || ''}`
+              (field.decorator as any)[1].title = `Flex Direction : ${field.value || ''}`
             }}
             decorator={[InputItems.Item]}
             component={[Radio.Group, { optionType: 'button' }]}
@@ -50,7 +50,7 @@ export const FlexStyleSetter: React.FC<IFlexStyleSetterProps> = observer(
               },
             ]}
             reactions={(field) => {
-              field.decorator[1].title = `Flex Wrap : ${field.value || ''}`
+              (field.decorator as any)[1].title = `Flex Wrap : ${field.value || ''}`
             }}
             decorator={[InputItems.Item]}
             component={[Radio.Group, { optionType: 'button' }]}
@@ -85,7 +85,7 @@ export const FlexStyleSetter: React.FC<IFlexStyleSetterProps> = observer(
               },
             ]}
             reactions={(field) => {
-              field.decorator[1].title = `Align Content : ${field.value || ''}`
+              (field.decorator as any)[1].title = `Align Content : ${field.value || ''}`
             }}
             decorator={[InputItems.Item]}
             component={[Radio.Group, { optionType: 'button' }]}
@@ -120,7 +120,7 @@ export const FlexStyleSetter: React.FC<IFlexStyleSetterProps> = observer(
               },
             ]}
             reactions={(field) => {
-              field.decorator[1].title = `Justify Content : ${
+              (field.decorator as any)[1].title = `Justify Content : ${
                 field.value || ''
               }`
             }}
@@ -153,7 +153,7 @@ export const FlexStyleSetter: React.FC<IFlexStyleSetterProps> = observer(
               },
             ]}
             reactions={(field) => {
-              field.decorator[1].title = `Align Items : ${field.value || ''}`
+              (field.decorator as any)[1].title = `Align Items : ${field.value || ''}`
             }}
             decorator={[InputItems.Item]}
             component={[Radio.Group, { optionType: 'button' }]}

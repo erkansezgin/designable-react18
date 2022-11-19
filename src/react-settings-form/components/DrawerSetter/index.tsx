@@ -2,10 +2,10 @@ import React, { Fragment, useState, useLayoutEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { observer, useField } from '@formily/react'
 import { FormLayout } from '@formily/antd'
-import { IconWidget, usePrefix, useTreeNode } from '@designable/react'
 import { Button, ButtonProps } from 'antd'
 import cls from 'classnames'
 import './styles.less'
+import { useTreeNode, usePrefix, IconWidget } from '../../../designable-react'
 
 export interface IDrawerSetterProps {
   text: React.ReactNode
