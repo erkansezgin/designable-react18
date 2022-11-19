@@ -3,7 +3,7 @@ import { TreeNode, Engine } from '@designable/core'
 export type ComponentNameMatcher =
   | string
   | string[]
-  | ((name: string, node: TreeNode | undefined, context?: any) => boolean)
+  | ((name: string, node: TreeNode | undefined | null, context?: any) => boolean)
 
 export const matchComponent = (
   node: TreeNode | undefined | null,

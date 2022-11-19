@@ -1,11 +1,11 @@
 import React from 'react'
 import { createBehavior, createResource } from '@designable/core'
-import { DnFC } from '@designable/react'
 import { createVoidFieldSchema } from '../Field'
 import { AllSchemas } from '../../schemas'
 import { AllLocales } from '../../locales'
 import cls from 'classnames'
 import './styles.less'
+import { DnFC } from '../../../react'
 
 export interface IDesignableTextProps {
   value?: string
@@ -31,7 +31,7 @@ export const Text: DnFC<IDesignableTextProps> = (props) => {
 Text.Behavior = createBehavior({
   name: 'Text',
   extends: ['Field'],
-  selector: (node) => node.props['x-component'] === 'Text',
+  selector: (node) => node.props?.['x-component'] === 'Text',
   designerProps: {
     propsSchema: createVoidFieldSchema(AllSchemas.Text),
   },
