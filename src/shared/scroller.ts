@@ -24,7 +24,8 @@ export const calcAutoScrollBasicInfo = (
   let begin: number
   let end: number
   let pos: number
-  let speedFactor: number
+  //water.li添加赋值
+  let speedFactor: number = 0
   if (axis === 'x') {
     begin = left
     end = right
