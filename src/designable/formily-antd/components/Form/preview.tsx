@@ -3,10 +3,10 @@ import { createBehavior, createResource } from '@designable/core'
 import { createForm } from '@formily/core'
 import { observer } from '@formily/react'
 import { Form as FormilyForm } from '@formily/antd'
-import { usePrefix, DnFC } from '@designable/react'
 import { AllSchemas } from '../../schemas'
 import { AllLocales } from '../../locales'
 import './styles.less'
+import { DnFC, usePrefix } from '../../../react'
 
 export const Form: DnFC<React.ComponentProps<typeof FormilyForm>> = observer(
   (props) => {
@@ -21,7 +21,7 @@ export const Form: DnFC<React.ComponentProps<typeof FormilyForm>> = observer(
     return (
       <FormilyForm
         {...props}
-        style={{ ...props.style }}
+        style={{ ...(props as any).style }}
         className={prefix}
         form={form}
       >
