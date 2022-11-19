@@ -131,14 +131,14 @@ const ShadowSVG = (props: any) => {
   const ref = useRef<HTMLDivElement>()
   const width = isNumSize(props.width) ? `${props.width}px` : props.width
   const height = isNumSize(props.height) ? `${props.height}px` : props.height
-  useEffect(() => {
-    if (ref.current) {
-      const root = ref.current.attachShadow({
-        mode: 'open',
-      })
-      root.innerHTML = `<svg viewBox="0 0 1024 1024" style="width:${width};height:${height}">${props.content}</svg>`
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (ref.current) {
+  //     const root = ref.current.attachShadow({
+  //       mode: 'open',
+  //     })
+  //     root.innerHTML = `<svg viewBox="0 0 1024 1024" style="width:${width};height:${height}">${props.content}</svg>`
+  //   }
+  // }, [])
   return <div ref={ref as any}></div>
 }
 IconWidget.ShadowSVG = ShadowSVG
