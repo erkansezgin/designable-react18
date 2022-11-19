@@ -16,6 +16,7 @@ export const HistoryWidget: React.FC = observer(() => {
     <div className={prefix}>
       {currentWorkspace.history.list().map((item, index) => {
         const type = item.type || 'default_state'
+        // eslint-disable-next-line no-useless-escape
         const token = type.replace(/\:/g, '_')
         return (
           <div
