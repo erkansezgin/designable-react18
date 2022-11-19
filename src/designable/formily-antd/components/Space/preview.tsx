@@ -1,11 +1,11 @@
 import React from 'react'
 import { Space as FormilySpace } from '@formily/antd'
 import { createBehavior, createResource } from '@designable/core'
-import { DnFC } from '@designable/react'
 import { createVoidFieldSchema } from '../Field'
 import { withContainer } from '../../common/Container'
 import { AllSchemas } from '../../schemas'
 import { AllLocales } from '../../locales'
+import { DnFC } from '../../../react'
 
 export const Space: DnFC<React.ComponentProps<typeof FormilySpace>> =
   withContainer(FormilySpace)
@@ -13,7 +13,7 @@ export const Space: DnFC<React.ComponentProps<typeof FormilySpace>> =
 Space.Behavior = createBehavior({
   name: 'Space',
   extends: ['Field'],
-  selector: (node) => node.props['x-component'] === 'Space',
+  selector: (node) => node.props?.['x-component'] === 'Space',
   designerProps: {
     droppable: true,
     inlineChildrenLayout: true,
