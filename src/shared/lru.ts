@@ -21,12 +21,24 @@
 const NEWER = Symbol('newer')
 const OLDER = Symbol('older')
 
-function Entry(key: any, value: any) {
-  this.key = key
-  this.value = value
-  this[NEWER] = undefined
-  this[OLDER] = undefined
+class Entry {
+  key: any;
+  value: any;
+  [key: string]: any;
+  constructor(key: any, value: any) {
+    this.key = key
+    this.value = value
+    this[NEWER as any] = undefined
+    this[OLDER as any] = undefined
+  }
 }
+// Water.Li替换
+// function Entry(key: any, value: any) {
+//   this.key = key
+//   this.value = value
+//   this[NEWER] = undefined
+//   this[OLDER] = undefined
+// }
 
 export class LRUMap<K, V> {
   size: number
@@ -86,7 +98,7 @@ export class LRUMap<K, V> {
     this._keymap.clear()
     const it = entries[Symbol.iterator]()
     for (let itv = it.next(); !itv.done; itv = it.next()) {
-      const e = new Entry(itv.value[0], itv.value[1])
+      const e = new Entry(itv.value[0], itv.value[1]) as any
       this._keymap.set(e.key, e)
       if (!entry) {
         this.oldest = e
@@ -105,7 +117,7 @@ export class LRUMap<K, V> {
 
   get(key: K) {
     // First, find our cache entry
-    const entry = this._keymap.get(key)
+    const entry = this._keymap.get(key) as any
     if (!entry) {
       return
     } // Not cached. Sorry.
@@ -115,7 +127,7 @@ export class LRUMap<K, V> {
   }
 
   set(key: K, value: V) {
-    let entry = this._keymap.get(key)
+    let entry = this._keymap.get(key) as any
 
     if (entry) {
       // update existing
@@ -179,7 +191,7 @@ export class LRUMap<K, V> {
   }
 
   delete(key: any) {
-    const entry = this._keymap.get(key)
+    const entry = this._keymap.get(key) as any
     if (!entry) {
       return
     }
